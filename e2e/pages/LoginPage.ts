@@ -8,23 +8,22 @@ export class LoginPage {
   }
 
   async navigate() {
-    await this.page.goto('http://automationexercise.com/login');
+    await this.page.goto("http://automationexercise.com/login");
   }
-    
-async signupText() {
-    return this.page.getByText('New User Signup!');
-}
 
-async signupName(name: string) {
+  async signupText() {
+    return this.page.getByText("New User Signup!");
+  }
+
+  async signupName(name: string) {
     return this.page.fill('input[name="name"]', name);
-}
+  }
 
-async signupEmail(email: string) {
+  async signupEmail(email: string) {
     return this.page.fill('input[data-qa="signup-email"]', email);
-}
+  }
 
-async signupButton() {
-    return this.page.getByRole('button', { name: 'Signup' });
-}
-
+  async signupButton() {
+    return this.page.getByRole("button", { name: "Signup" });
+  }
 }

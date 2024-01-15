@@ -8,14 +8,14 @@ export class HomePage {
   }
 
   async navigate() {
-    await this.page.goto('http://automationexercise.com');
+    await this.page.goto("http://automationexercise.com");
   }
 
   async getLogo() {
-   return this.page.getByAltText('Website for automation practice')
+    return this.page.getByAltText("Website for automation practice");
   }
 
   async signupLoginButton() {
-    return this.page.getByText('Signup / Login')
+    return this.page.getByText("Signup / Login");
   }
 }

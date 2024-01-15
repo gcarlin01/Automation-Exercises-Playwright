@@ -8,11 +8,11 @@ export class SignupPage {
   }
 
   async navigate() {
-    await this.page.goto('http://automationexercise.com/signup');
+    await this.page.goto("http://automationexercise.com/signup");
   }
-  
+
   async enterAccountInformationText() {
-    return this.page.getByText('ENTER ACCOUNT INFORMATION');
+    return this.page.getByText("ENTER ACCOUNT INFORMATION");
   }
 
   async accountInfoCreation(name, email, password, dob) {
@@ -21,6 +21,5 @@ export class SignupPage {
     await this.page.fill('input[data-qa="signup-password"]', password);
     await this.page.fill('input[data-qa="signup-dob"]', dob);
   }
-
 }
 // Fill details: Title, Name, Email, Password, Date of birth

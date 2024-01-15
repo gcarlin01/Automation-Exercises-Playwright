@@ -38,4 +38,7 @@ npx playwright test --headed
 ```bash
 # display results
 npx playwright show-report
+
+# run formatter manually
+npm run format
 ```
