@@ -1,35 +1,34 @@
-import { test, expect } from '@playwright/test';
-import { HomePage } from '../pages/HomePage';
-import { LoginPage } from '../pages/LoginPage';
-import { SignupPage } from '../pages/SignupPage';
+import { test, expect } from "@playwright/test";
+import { HomePage } from "../pages/HomePage";
+import { LoginPage } from "../pages/LoginPage";
+import { SignupPage } from "../pages/SignupPage";
 
-test('can register a user', async ({ page }) => {
-    const homePage = new HomePage(page);
-    await homePage.navigate();
+test("can register a user", async ({ page }) => {
+  const homePage = new HomePage(page);
+  await homePage.navigate();
 
-    const homePageLogo = await homePage.getLogo();
-    await expect(homePageLogo).toBeVisible();
+  const homePageLogo = await homePage.getLogo();
+  await expect(homePageLogo).toBeVisible();
 
-    const signupLoginButton = await homePage.signupLoginButton();
-    await signupLoginButton.click();
+  const signupLoginButton = await homePage.signupLoginButton();
+  await signupLoginButton.click();
 
-    const loginPage = new LoginPage(page);
-    const signupText = await loginPage.signupText();
-    await expect(signupText).toBeVisible();
+  const loginPage = new LoginPage(page);
+  const signupText = await loginPage.signupText();
+  await expect(signupText).toBeVisible();
 
-    await loginPage.signupName('Test User');
-    
-    await loginPage.signupEmail('testuser@qa.com');
+  await loginPage.signupName("Test User");
 
-    const signupButton = await loginPage.signupButton();
-    await signupButton.click();   
+  await loginPage.signupEmail("testuser@qa.com");
 
-    const signupPage = new SignupPage(page);
-    const enterAccountInformationText = await signupPage.enterAccountInformationText();
-    await expect(enterAccountInformationText).toBeVisible();
-    
+  const signupButton = await loginPage.signupButton();
+  await signupButton.click();
 
-})
+  const signupPage = new SignupPage(page);
+  const enterAccountInformationText =
+    await signupPage.enterAccountInformationText();
+  await expect(enterAccountInformationText).toBeVisible();
+});
 
 // 1. Launch browser
 // 2. Navigate to url 'http://automationexercise.com'
