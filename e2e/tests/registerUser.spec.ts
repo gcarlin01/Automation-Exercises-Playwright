@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { HomePage } from "../pages/HomePage";
 import { LoginPage } from "../pages/LoginPage";
 import { SignupPage } from "../pages/SignupPage";
-import usersData from "../datasets.js/usersData";
+import usersData from "../datasets/usersData";
 
 test("can register a user", async ({ page }) => {
   const homePage = new HomePage(page);
