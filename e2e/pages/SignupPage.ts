@@ -11,7 +11,7 @@ export class SignupPage {
     await this.page.goto("http://automationexercise.com/signup");
   }
 
-  async enterAccountInformationText() {
+  async getAccountInfoFormTitle() {
     return this.page.getByText("ENTER ACCOUNT INFORMATION");
   }
 
@@ -50,4 +50,3 @@ export class SignupPage {
     await this.page.fill('input[name="mobile_number"]', usersData.mobileNumber);
   }
 }
-// Fill usersData: Title, Name, Email, Password, Date of birth

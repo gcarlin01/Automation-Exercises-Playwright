@@ -14,16 +14,16 @@ test("can register a user", async ({ page }) => {
   await homePage.clickSignupLoginButton();
 
   const loginPage = new LoginPage(page);
-  const signupText = await loginPage.signupText();
+  const signupText = await loginPage.getSignupFormTitle();
   await expect(signupText).toBeVisible();
 
-  await loginPage.signupNameAndEmail(usersData.name, usersData.email);
+  await loginPage.fillSignupForm(usersData.name, usersData.email);
 
   await loginPage.clickSignupButton();
 
   const signupPage = new SignupPage(page);
   const enterAccountInformationText =
-    await signupPage.enterAccountInformationText();
+    await signupPage.getAccountInfoFormTitle();
   await expect(enterAccountInformationText).toBeVisible();
 
   const nameAutoFill = await signupPage.nameAutoFill();
