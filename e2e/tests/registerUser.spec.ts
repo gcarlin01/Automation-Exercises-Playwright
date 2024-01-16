@@ -2,6 +2,7 @@ import { test, expect } from "@playwright/test";
 import { HomePage } from "../pages/HomePage";
 import { LoginPage } from "../pages/LoginPage";
 import { SignupPage } from "../pages/SignupPage";
+import usersData from "../datasets.js/usersData";
 
 test("can register a user", async ({ page }) => {
   const homePage = new HomePage(page);
@@ -10,24 +11,28 @@ test("can register a user", async ({ page }) => {
   const homePageLogo = await homePage.getLogo();
   await expect(homePageLogo).toBeVisible();
 
-  const signupLoginButton = await homePage.signupLoginButton();
-  await signupLoginButton.click();
+  await homePage.clickSignupLoginButton();
 
   const loginPage = new LoginPage(page);
   const signupText = await loginPage.signupText();
   await expect(signupText).toBeVisible();
 
-  await loginPage.signupName("Test User");
+  await loginPage.signupNameAndEmail(usersData.name, usersData.email);
 
-  await loginPage.signupEmail("testuser@qa.com");
-
-  const signupButton = await loginPage.signupButton();
-  await signupButton.click();
+  await loginPage.clickSignupButton();
 
   const signupPage = new SignupPage(page);
   const enterAccountInformationText =
     await signupPage.enterAccountInformationText();
   await expect(enterAccountInformationText).toBeVisible();
+
+  const nameAutoFill = await signupPage.nameAutoFill();
+  expect(nameAutoFill).toHaveValue(usersData.name);
+
+  const emailAutoFill = await signupPage.emailAutoFill();
+  expect(emailAutoFill).toHaveValue(usersData.email);
+
+  await signupPage.accountInfoCreation(usersData);
 });
 
 // 1. Launch browser

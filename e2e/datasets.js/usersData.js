@@ -11,10 +11,12 @@ let usersData = {
   lastName: "Carlin",
   company: "Unemployment Corp",
   address: "123 Main St",
-  address: "Apt 123",
+  address2: "Apt 123",
   country: "United States",
   state: "Ohio",
   city: "Columbus",
   zipcode: "43017",
   mobileNumber: "1234567890",
 };
+
+module.exports = usersData;
