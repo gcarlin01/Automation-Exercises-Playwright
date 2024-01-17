@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { HomePage } from "../pages/HomePage";
 import { LoginPage } from "../pages/LoginPage";
 import { SignupPage } from "../pages/SignupPage";
-import usersData from "../datasets/usersData";
+import { usersData } from "../datasets/usersData";
 
 test("can register a user", async ({ page }) => {
   const homePage = new HomePage(page);
@@ -25,13 +25,14 @@ test("can register a user", async ({ page }) => {
   const getAccountInfoFormTitle = await signupPage.getAccountInfoFormTitle();
   await expect(getAccountInfoFormTitle).toBeVisible();
 
-  const nameAutoFill = await signupPage.nameAutoFill();
-  expect(nameAutoFill).toHaveValue(usersData.name);
+  const nameFromField = await signupPage.getValueFromNameField();
+  expect(nameFromField).toEqual(usersData.name);
 
-  const emailAutoFill = await signupPage.emailAutoFill();
-  expect(emailAutoFill).toHaveValue(usersData.email);
+  const emailFromField = await signupPage.getValueFromEmailField();
+  expect(emailFromField).toEqual(usersData.email);
 
-  await signupPage.accountInfoCreation(usersData);
+  await signupPage.fillAccountInfoForm(usersData);
+  await signupPage.fillAddressInfoForm(usersData);
 });
 
 // 1. Launch browser

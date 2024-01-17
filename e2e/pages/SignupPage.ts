@@ -1,5 +1,28 @@
 import { Page } from "@playwright/test";
 
+export interface FormValues {
+  title: "Mr." | "Mrs.";
+  name: string;
+  email: string;
+  password: string;
+  dob: {
+    day: string;
+    month: string;
+    year: string;
+  };
+  signupNewsletter: boolean;
+  receiveOffers: boolean;
+  firstName: string;
+  lastName: string;
+  company: string;
+  address: string;
+  address2: string;
+  country: string;
+  state: string;
+  city: string;
+  zipcode: string;
+  mobileNumber: string;
+}
 export class SignupPage {
   private page: Page;
 
@@ -15,17 +38,20 @@ export class SignupPage {
     return this.page.getByText("ENTER ACCOUNT INFORMATION");
   }
 
-  async nameAutoFill() {
-    return this.page.getByLabel("Name *", { exact: true });
+  async getValueFromNameField() {
+    return this.page.getByLabel("Name *", { exact: true }).inputValue();
   }
 
-  async emailAutoFill() {
-    return this.page.getByLabel("Email *", { exact: true });
+  async getValueFromEmailField() {
+    return this.page.getByLabel("Email *", { exact: true }).inputValue();
   }
 
-  async accountInfoCreation(usersData: any) {
+  async fillAccountInfoForm(usersData: FormValues) {
     // Checking Mr. or Mrs.
-    await this.page.check('input[id="id_gender1"]');
+    if (usersData.title === "Mr.") {
+      await this.page.check('input[id="id_gender1"]');
+    } else await this.page.check('input[id="id_gender2"]');
+    // Filling password
     await this.page.fill('input[data-qa="password"]', usersData.password);
 
     // Selecting DOB
@@ -34,10 +60,15 @@ export class SignupPage {
     await this.page.locator("#years").selectOption(usersData.dob.year);
 
     // Selecting checkboxes
-    await this.page.check('input[name="newsletter"]');
-    await this.page.check('input[name="optin"]');
-
-    // Fill additional usersData
+    if (usersData.signupNewsletter === true) {
+      await this.page.check('input[name="newsletter"]');
+    }
+    if (usersData.receiveOffers === true) {
+      await this.page.check('input[name="optin"]');
+    }
+  }
+  async fillAddressInfoForm(usersData: FormValues) {
+    // Filling address information section in form
     await this.page.fill('input[name="first_name"]', usersData.firstName);
     await this.page.fill('input[name="last_name"]', usersData.lastName);
     await this.page.fill('input[name="company"]', usersData.company);

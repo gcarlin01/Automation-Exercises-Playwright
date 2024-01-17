@@ -1,4 +1,7 @@
-let usersData = {
+import { FormValues } from "../pages/SignupPage";
+
+export let usersData: FormValues = {
+  title: "Mr.",
   name: "Giancarlo Carlin",
   email: "gctester@qa.com",
   password: "password123",
@@ -7,6 +10,8 @@ let usersData = {
     month: "4",
     year: "1987",
   },
+  signupNewsletter: true,
+  receiveOffers: false,
   firstName: "Giancarlo",
   lastName: "Carlin",
   company: "Unemployment Corp",
@@ -18,5 +23,3 @@ let usersData = {
   zipcode: "43017",
   mobileNumber: "1234567890",
 };
-
-module.exports = usersData;
