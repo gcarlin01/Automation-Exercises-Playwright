@@ -80,4 +80,24 @@ export class SignupPage {
     await this.page.fill('input[name="zipcode"]', usersData.zipcode);
     await this.page.fill('input[name="mobile_number"]', usersData.mobileNumber);
   }
+
+  async clickCreateAccountButton() {
+    const createAccountButton = this.page.getByRole("button", {
+      name: "Create Account",
+    });
+
+    await createAccountButton.click();
+  }
+
+  async getAccountCreatedTitle() {
+    return this.page.getByText("ACCOUNT CREATED!");
+  }
+
+  async clickContinueButtonAtAcctCreated() {
+    const continueButtonCreate = this.page.getByRole("link", {
+      name: "Continue",
+    });
+
+    await continueButtonCreate.click();
+  }
 }

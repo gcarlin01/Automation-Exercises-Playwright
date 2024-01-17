@@ -33,6 +33,23 @@ test("can register a user", async ({ page }) => {
 
   await signupPage.fillAccountInfoForm(usersData);
   await signupPage.fillAddressInfoForm(usersData);
+
+  await signupPage.clickCreateAccountButton();
+
+  const accountCreatedTitle = await signupPage.getAccountCreatedTitle();
+  await expect(accountCreatedTitle).toBeVisible();
+
+  await signupPage.clickContinueButtonAtAcctCreated();
+
+  const loggedInAsName = await loginPage.confirmLoggedInAsName(usersData.name);
+  expect(loggedInAsName).toBeVisible();
+
+  await loginPage.clickDeleteAccountLink();
+
+  const accountDeletedTitle = await loginPage.getAccountDeletedTitle();
+  await expect(accountDeletedTitle).toBeVisible();
+
+  await loginPage.clickContinueButtonAtAcctDeleted();
 });
 
 // 1. Launch browser
