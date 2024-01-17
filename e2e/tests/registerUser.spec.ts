@@ -2,6 +2,7 @@ import { test, expect } from "@playwright/test";
 import { HomePage } from "../pages/HomePage";
 import { LoginPage } from "../pages/LoginPage";
 import { SignupPage } from "../pages/SignupPage";
+import { usersData } from "../datasets/usersData";
 
 test("can register a user", async ({ page }) => {
   const homePage = new HomePage(page);
@@ -10,24 +11,28 @@ test("can register a user", async ({ page }) => {
   const homePageLogo = await homePage.getLogo();
   await expect(homePageLogo).toBeVisible();
 
-  const signupLoginButton = await homePage.signupLoginButton();
-  await signupLoginButton.click();
+  await homePage.clickSignupLoginButton();
 
   const loginPage = new LoginPage(page);
-  const signupText = await loginPage.signupText();
-  await expect(signupText).toBeVisible();
+  const getSignupFormTitle = await loginPage.getSignupFormTitle();
+  await expect(getSignupFormTitle).toBeVisible();
 
-  await loginPage.signupName("Test User");
+  await loginPage.fillSignupForm(usersData.name, usersData.email);
 
-  await loginPage.signupEmail("testuser@qa.com");
-
-  const signupButton = await loginPage.signupButton();
-  await signupButton.click();
+  await loginPage.clickSignupButton();
 
   const signupPage = new SignupPage(page);
-  const enterAccountInformationText =
-    await signupPage.enterAccountInformationText();
-  await expect(enterAccountInformationText).toBeVisible();
+  const getAccountInfoFormTitle = await signupPage.getAccountInfoFormTitle();
+  await expect(getAccountInfoFormTitle).toBeVisible();
+
+  const nameFromField = await signupPage.getValueFromNameField();
+  expect(nameFromField).toEqual(usersData.name);
+
+  const emailFromField = await signupPage.getValueFromEmailField();
+  expect(emailFromField).toEqual(usersData.email);
+
+  await signupPage.fillAccountInfoForm(usersData);
+  await signupPage.fillAddressInfoForm(usersData);
 });
 
 // 1. Launch browser

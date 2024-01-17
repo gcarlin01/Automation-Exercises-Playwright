@@ -15,7 +15,9 @@ export class HomePage {
     return this.page.getByAltText("Website for automation practice");
   }
 
-  async signupLoginButton() {
-    return this.page.getByText("Signup / Login");
+  async clickSignupLoginButton() {
+    const signupLoginButton = this.page.getByText("Signup / Login");
+
+    await signupLoginButton.click();
   }
 }

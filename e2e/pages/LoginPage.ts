@@ -11,19 +11,18 @@ export class LoginPage {
     await this.page.goto("http://automationexercise.com/login");
   }
 
-  async signupText() {
+  async getSignupFormTitle() {
     return this.page.getByText("New User Signup!");
   }
 
-  async signupName(name: string) {
-    return this.page.fill('input[name="name"]', name);
+  async fillSignupForm(name: string, email: string) {
+    await this.page.fill('input[name="name"]', name);
+    await this.page.fill('input[data-qa="signup-email"]', email);
   }
 
-  async signupEmail(email: string) {
-    return this.page.fill('input[data-qa="signup-email"]', email);
-  }
+  async clickSignupButton() {
+    const signupButton = this.page.getByRole("button", { name: "Signup" });
 
-  async signupButton() {
-    return this.page.getByRole("button", { name: "Signup" });
+    await signupButton.click();
   }
 }
