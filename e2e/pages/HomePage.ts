@@ -20,4 +20,8 @@ export class HomePage {
 
     await signupLoginButton.click();
   }
+
+  async getLoggedInText() {
+    return this.page.getByText(`Logged in as `);
+  }
 }

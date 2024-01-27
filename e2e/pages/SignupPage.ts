@@ -88,16 +88,4 @@ export class SignupPage {
 
     await createAccountButton.click();
   }
-
-  async getAccountCreatedTitle() {
-    return this.page.getByText("ACCOUNT CREATED!");
-  }
-
-  async clickContinueButtonAtAcctCreated() {
-    const continueButtonCreate = this.page.getByRole("link", {
-      name: "Continue",
-    });
-
-    await continueButtonCreate.click();
-  }
 }

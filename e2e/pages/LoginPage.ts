@@ -26,27 +26,11 @@ export class LoginPage {
     await signupButton.click();
   }
 
-  async confirmLoggedInAsName(name: string) {
-    return this.page.getByText(`Logged in as ${name}`);
-  }
-
   async clickDeleteAccountLink() {
     const deleteAccountLink = this.page.getByRole("link", {
       name: "Delete Account",
     });
 
     await deleteAccountLink.click();
-  }
-
-  async getAccountDeletedTitle() {
-    return this.page.getByText("ACCOUNT DELETED!");
-  }
-
-  async clickContinueButtonAtAcctDeleted() {
-    const continueButtonDelete = this.page.getByRole("link", {
-      name: "Continue",
-    });
-
-    await continueButtonDelete.click();
   }
 }

@@ -3,6 +3,8 @@ import { HomePage } from "../pages/HomePage";
 import { LoginPage } from "../pages/LoginPage";
 import { SignupPage } from "../pages/SignupPage";
 import { usersData } from "../datasets/usersData";
+import { CreateAccountPage } from "../pages/CreateAccountPage";
+import { DeleteAccountPage } from "../pages/DeleteAccountPage";
 
 test("can register a user", async ({ page }) => {
   const homePage = new HomePage(page);
@@ -36,20 +38,23 @@ test("can register a user", async ({ page }) => {
 
   await signupPage.clickCreateAccountButton();
 
-  const accountCreatedTitle = await signupPage.getAccountCreatedTitle();
+  const createAccountPage = new CreateAccountPage(page);
+  const accountCreatedTitle = await createAccountPage.getPageTitle();
   await expect(accountCreatedTitle).toBeVisible();
 
-  await signupPage.clickContinueButtonAtAcctCreated();
+  await createAccountPage.clickContinueButton();
 
-  const loggedInAsName = await loginPage.confirmLoggedInAsName(usersData.name);
-  expect(loggedInAsName).toBeVisible();
+  const loggedInText = await homePage.getLoggedInText();
+  await expect(loggedInText).toHaveText(`Logged in as ${usersData.name}`);
+  await expect(loggedInText).toBeVisible();
 
   await loginPage.clickDeleteAccountLink();
 
-  const accountDeletedTitle = await loginPage.getAccountDeletedTitle();
+  const deleteAccountPage = new DeleteAccountPage(page);
+  const accountDeletedTitle = await deleteAccountPage.getPageTitle();
   await expect(accountDeletedTitle).toBeVisible();
 
-  await loginPage.clickContinueButtonAtAcctDeleted();
+  await deleteAccountPage.clickContinueButton();
 });
 
 // 1. Launch browser
