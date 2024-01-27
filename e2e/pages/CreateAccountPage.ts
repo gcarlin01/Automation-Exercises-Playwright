@@ -1,9 +1,6 @@
 import { Page } from "@playwright/test";
 
 export class CreateAccountPage {
-  static getPageTitle() {
-    throw new Error("Method not implemented.");
-  }
   private page: Page;
 
   constructor(page: Page) {
