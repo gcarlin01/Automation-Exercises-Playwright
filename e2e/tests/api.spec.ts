@@ -5,7 +5,7 @@ test.describe.parallel("API Tests", () => {
     const response = await request.get(`/api/productsList`);
     expect(response.status()).toBe(200);
     const responseBody = JSON.parse(await response.text());
-    console.log(responseBody);
+    expect(responseBody.products.length).toBeGreaterThan(30); // expecti that products array has more than 30 items
   });
 
   test("Test API to POST to all products", async ({ request }) => {
