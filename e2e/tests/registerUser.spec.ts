@@ -3,6 +3,8 @@ import { HomePage } from "../pages/HomePage";
 import { LoginPage } from "../pages/LoginPage";
 import { SignupPage } from "../pages/SignupPage";
 import { usersData } from "../datasets/usersData";
+import { CreateAccountPage } from "../pages/CreateAccountPage";
+import { DeleteAccountPage } from "../pages/DeleteAccountPage";
 
 test("can register a user", async ({ page }) => {
   const homePage = new HomePage(page);
@@ -33,6 +35,26 @@ test("can register a user", async ({ page }) => {
 
   await signupPage.fillAccountInfoForm(usersData);
   await signupPage.fillAddressInfoForm(usersData);
+
+  await signupPage.clickCreateAccountButton();
+
+  const createAccountPage = new CreateAccountPage(page);
+  const accountCreatedTitle = await createAccountPage.getPageTitle();
+  await expect(accountCreatedTitle).toBeVisible();
+
+  await createAccountPage.clickContinueButton();
+
+  const loggedInText = await homePage.getLoggedInText();
+  await expect(loggedInText).toHaveText(`Logged in as ${usersData.name}`);
+  await expect(loggedInText).toBeVisible();
+
+  await loginPage.clickDeleteAccountLink();
+
+  const deleteAccountPage = new DeleteAccountPage(page);
+  const accountDeletedTitle = await deleteAccountPage.getPageTitle();
+  await expect(accountDeletedTitle).toBeVisible();
+
+  await deleteAccountPage.clickContinueButton();
 });
 
 // 1. Launch browser

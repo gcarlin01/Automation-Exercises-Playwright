@@ -80,4 +80,12 @@ export class SignupPage {
     await this.page.fill('input[name="zipcode"]', usersData.zipcode);
     await this.page.fill('input[name="mobile_number"]', usersData.mobileNumber);
   }
+
+  async clickCreateAccountButton() {
+    const createAccountButton = this.page.getByRole("button", {
+      name: "Create Account",
+    });
+
+    await createAccountButton.click();
+  }
 }

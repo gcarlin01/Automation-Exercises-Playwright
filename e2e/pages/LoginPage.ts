@@ -25,4 +25,12 @@ export class LoginPage {
 
     await signupButton.click();
   }
+
+  async clickDeleteAccountLink() {
+    const deleteAccountLink = this.page.getByRole("link", {
+      name: "Delete Account",
+    });
+
+    await deleteAccountLink.click();
+  }
 }
