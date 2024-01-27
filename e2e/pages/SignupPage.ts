@@ -31,7 +31,7 @@ export class SignupPage {
   }
 
   async navigate() {
-    await this.page.goto("http://automationexercise.com/signup");
+    await this.page.goto("/signup");
   }
 
   async getAccountInfoFormTitle() {

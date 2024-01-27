@@ -8,7 +8,7 @@ export class HomePage {
   }
 
   async navigate() {
-    await this.page.goto("http://automationexercise.com");
+    await this.page.goto(`/`);
   }
 
   async getLogo() {
