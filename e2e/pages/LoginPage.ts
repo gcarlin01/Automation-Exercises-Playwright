@@ -8,7 +8,7 @@ export class LoginPage {
   }
 
   async navigate() {
-    await this.page.goto("http://automationexercise.com/login");
+    await this.page.goto("/login");
   }
 
   async getSignupFormTitle() {
