@@ -1,19 +1,19 @@
 import { test, expect } from "@playwright/test";
+import { ProductsList } from "../../api/utils/Products";
+import { errorResponseBody405 } from "../../dataset/errorResponses";
 
 test.describe.parallel("GET and POST to all products", () => {
   test("GET productsList returns all products", async ({ request }) => {
-    const response = await request.get(`/api/productsList`);
-    expect(response.status()).toBe(200);
-    const responseBody = JSON.parse(await response.text());
-    expect(responseBody.products.length).toBeGreaterThan(30);
+    const producstList = new ProductsList(request);
+    const getResponse = await producstList.GetResponse();
+    expect(getResponse.status()).toBe(200);
+    const getResponseBody = await producstList.GetResponseBody();
+    expect(getResponseBody.products.length).toBeGreaterThan(30);
   });
 
   test("POST productsList returns unsupported method", async ({ request }) => {
-    const response = await request.post(`/api/productsList`, {});
-    const responseBody = JSON.parse(await response.text());
-    expect(responseBody.responseCode).toEqual(405);
-    expect(responseBody.message).toEqual(
-      "This request method is not supported.",
-    );
+    const producstList = new ProductsList(request);
+    const postResponseBody = await producstList.PostResponseBody();
+    expect(postResponseBody).toEqual(errorResponseBody405);
   });
 });
