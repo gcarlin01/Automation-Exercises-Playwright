@@ -1,4 +1,4 @@
-import { FormValues } from "../pages/pages/SignupPage";
+import { FormValues } from "../pages/SignupPage";
 
 export let usersData: FormValues = {
   title: "Mr.",
