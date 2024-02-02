@@ -2,12 +2,12 @@ import { APIRequestContext } from "@playwright/test";
 
 export class SearchProduct {
   private request: APIRequestContext;
+  private searchProductEndpoint = `/api/searchProduct`;
+  private searchProductFormParameter = { form: { search_product: "top" } };
 
   constructor(request: APIRequestContext) {
     this.request = request;
   }
-  searchProductEndpoint = `/api/searchProduct`;
-  searchProductFormParameter = { form: { search_product: "top" } };
 
   async PostUsingParamResponse() {
     const response = this.request.post(

@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-test.describe.parallel("GET and PUT to all brands", () => {
+test.describe.parallel("brands", () => {
   test("GET brandsList returns all brands", async ({ request }) => {
     const response = await request.get(`/api/brandsList`);
     expect(response.status()).toBe(200);
