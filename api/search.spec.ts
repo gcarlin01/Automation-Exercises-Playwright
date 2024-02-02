@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
-import { SearchProduct } from "../../api/utils/Search";
-import { errorResponseBody400 } from "../../dataset/errorResponses";
+import { SearchProduct } from "./utils/Search";
+import { errorResponseBody400 } from "../e2e/dataset/errorResponses";
 
 test.describe.parallel("POST with and without request parameter", () => {
   test("POST searchProduct passing requested parameter returns the searched product list", async ({
