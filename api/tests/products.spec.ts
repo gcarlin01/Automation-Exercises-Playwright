@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
-import { ProductsList } from "./utils/Products";
-import { errorResponseBody405 } from "../e2e/dataset/errorResponses";
+import { ProductsList } from "../utils/Products";
+import { errorResponseBody405 } from "../../e2e/data/errorResponses";
 
 test.describe.parallel("GET and POST to all products", () => {
   test("GET productsList returns all products", async ({ request }) => {

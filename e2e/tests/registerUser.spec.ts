@@ -1,10 +1,10 @@
 import { test, expect } from "@playwright/test";
-import { HomePage } from "./pages/HomePage";
-import { LoginPage } from "./pages/LoginPage";
-import { SignupPage } from "./pages/SignupPage";
-import { CreateAccountPage } from "./pages/CreateAccountPage";
-import { DeleteAccountPage } from "./pages/DeleteAccountPage";
-import { usersData } from "./dataset/usersData";
+import { HomePage } from "../pages/HomePage";
+import { LoginPage } from "../pages/LoginPage";
+import { SignupPage } from "../pages/SignupPage";
+import { CreateAccountPage } from "../pages/CreateAccountPage";
+import { DeleteAccountPage } from "../pages/DeleteAccountPage";
+import { usersData } from "../data/usersData";
 
 test("can register a user", async ({ page }) => {
   const homePage = new HomePage(page);
