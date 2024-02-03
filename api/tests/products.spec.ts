@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { ProductsApi } from "../utils/ProductsApi";
 
-test.describe.parallel("products api", () => {
+test.describe.parallel("Products API", () => {
   test("GET productsList returns all products", async ({ request }) => {
     const api = new ProductsApi(request);
     const response = await api.Get();

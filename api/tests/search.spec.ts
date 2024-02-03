@@ -1,25 +1,28 @@
 import { test, expect } from "@playwright/test";
-import { SearchProduct } from "../utils/Search";
-import { errorResponseBody400 } from "../../e2e/data/errorResponses";
+import { SearchProductApi } from "../utils/SearchProductApi";
 
-test.describe.parallel("POST with and without request parameter", () => {
+test.describe.parallel("Search Product API", () => {
   test("POST searchProduct passing requested parameter returns the searched product list", async ({
     request,
   }) => {
-    const searchProduct = new SearchProduct(request);
-    const postResponse = await searchProduct.PostUsingParamResponse();
-    expect(postResponse.status()).toBe(200);
-    const postResponseBody = await searchProduct.PostUsingParamResponseBody();
-    const firstProductName = postResponseBody.products[0].name;
+    const api = new SearchProductApi(request);
+    const response = await api.PostWithParam();
+    expect(response.status).toBe(200);
+    const firstProductName = response.body.products[0].name;
     expect(firstProductName).toContain("Top");
   });
 
   test("POST searchProduct NOT passing requested parameter returns bad request", async ({
     request,
   }) => {
-    const searchProduct = new SearchProduct(request);
-    const postResponseBody =
-      await searchProduct.PostNotUsingParamResponseBody();
-    expect(postResponseBody).toEqual(errorResponseBody400);
+    const api = new SearchProductApi(request);
+    const response = await api.PostWithoutParam();
+
+    const expectedBody = {
+      responseCode: 400,
+      message:
+        "Bad request, search_product parameter is missing in POST request.",
+    };
+    expect(response.body).toEqual(expectedBody);
   });
 });
