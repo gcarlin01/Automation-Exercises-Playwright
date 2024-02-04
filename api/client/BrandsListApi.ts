@@ -1,19 +1,15 @@
 import { APIRequestContext } from "@playwright/test";
 
-export class SearchProductApi {
+export class BrandsListApi {
   private request: APIRequestContext;
-  private searchProductEndpoint = `/api/searchProduct`;
-  private searchProductFormParameter = { form: { search_product: "top" } };
+  private productsListEndpoint = "/api/brandsList";
 
   constructor(request: APIRequestContext) {
     this.request = request;
   }
 
-  async PostWithParam() {
-    const response = await this.request.post(
-      this.searchProductEndpoint,
-      this.searchProductFormParameter,
-    );
+  public async Get() {
+    const response = await this.request.get(this.productsListEndpoint);
     const responseBody = await response.text();
 
     return {
@@ -22,8 +18,8 @@ export class SearchProductApi {
     };
   }
 
-  async PostWithoutParam() {
-    const response = await this.request.post(this.searchProductEndpoint, {});
+  public async Put() {
+    const response = await this.request.put(this.productsListEndpoint);
     const responseBody = await response.text();
 
     return {
