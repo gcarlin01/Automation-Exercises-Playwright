@@ -3,19 +3,15 @@ import { APIRequestContext } from "@playwright/test";
 export class VerifyLoginApi {
   private request: APIRequestContext;
   private verifyLoginEndpoint = `/api/verifyLogin`;
-  private verifyLoginFormParameter = {
-    form: { email: "testUser@QA.com", password: "test1234" },
-  };
 
   constructor(request: APIRequestContext) {
     this.request = request;
   }
 
-  async PostWithParams() {
-    const response = await this.request.post(
-      this.verifyLoginEndpoint,
-      this.verifyLoginFormParameter,
-    );
+  async PostWithParams(email: string, password: string) {
+    const response = await this.request.post(this.verifyLoginEndpoint, {
+      form: { email: email, password: password },
+    });
     const responseBody = await response.text();
 
     return {
@@ -24,9 +20,9 @@ export class VerifyLoginApi {
     };
   }
 
-  async PostWithoutEmailParam() {
+  async PostWithOnlyPasswordParam(password: string) {
     const response = await this.request.post(this.verifyLoginEndpoint, {
-      form: { password: this.verifyLoginFormParameter.form.password },
+      form: { password: password },
     });
     const responseBody = await response.text();
 
