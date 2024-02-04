@@ -1,8 +1,8 @@
 import { APIRequestContext } from "@playwright/test";
 
-export class BrandsApi {
+export class BrandsListApi {
   private request: APIRequestContext;
-  private productsListEndpoint = `/api/brandsList`;
+  private productsListEndpoint = "/api/brandsList";
 
   constructor(request: APIRequestContext) {
     this.request = request;

@@ -2,7 +2,7 @@ import { APIRequestContext } from "@playwright/test";
 
 export class SearchProductApi {
   private request: APIRequestContext;
-  private searchProductEndpoint = `/api/searchProduct`;
+  private searchProductEndpoint = "/api/searchProduct";
   private searchProductFormParameter = { form: { search_product: "top" } };
 
   constructor(request: APIRequestContext) {

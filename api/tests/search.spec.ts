@@ -1,8 +1,8 @@
 import { test, expect } from "@playwright/test";
 import { SearchProductApi } from "../utils/SearchProductApi";
 
-test.describe.parallel("Search Product API", () => {
-  test("POST searchProduct passing requested parameter returns the searched product list", async ({
+test.describe.parallel("/api/searchProduct", () => {
+  test("POST passing requested parameter returns the searched product list", async ({
     request,
   }) => {
     const api = new SearchProductApi(request);
@@ -12,7 +12,7 @@ test.describe.parallel("Search Product API", () => {
     expect(firstProductName).toContain("Top");
   });
 
-  test("POST searchProduct NOT passing requested parameter returns bad request", async ({
+  test("POST NOT passing requested parameter returns bad request", async ({
     request,
   }) => {
     const api = new SearchProductApi(request);
