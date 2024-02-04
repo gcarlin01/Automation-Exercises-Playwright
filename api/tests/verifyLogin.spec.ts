@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { VerifyLoginApi } from "../utils/VerifyLoginApi";
+import { VerifyLoginApi } from "../client/VerifyLoginApi";
 
 test.describe.parallel("/api/verifylogin", () => {
   test("POST with correct credentials returns user exists", async ({

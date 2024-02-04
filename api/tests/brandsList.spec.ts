@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { BrandsListApi } from "../utils/BrandsListApi";
+import { BrandsListApi } from "../client/BrandsListApi";
 
 test.describe.parallel("/api/brandsList", () => {
   test("GET returns all brands", async ({ request }) => {

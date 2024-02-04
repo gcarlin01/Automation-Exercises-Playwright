@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { SearchProductApi } from "../utils/SearchProductApi";
+import { SearchProductApi } from "../client/SearchProductApi";
 
 test.describe.parallel("/api/searchProduct", () => {
   test("POST passing requested parameter returns the searched product list", async ({
