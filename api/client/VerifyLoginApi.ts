@@ -19,4 +19,14 @@ export class VerifyLoginApi {
       body: JSON.parse(responseBody),
     };
   }
+
+  async Delete() {
+    const response = await this.request.delete(this.verifyLoginEndpoint);
+    const responseBody = await response.text();
+
+    return {
+      status: response.status(),
+      body: JSON.parse(responseBody),
+    };
+  }
 }
